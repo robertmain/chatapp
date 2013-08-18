@@ -1,0 +1,11 @@
+{
+    "name": "RealTimeWebChat",
+    "version": "0.0.0",
+    "Description": "A real time chat application",
+    "dependencies": {
+        "socket.io": "latest",
+        "express": "latest",
+        "jade": "latest"
+    },
+    "author": "Robert Main"
+}
