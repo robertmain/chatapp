@@ -1,21 +1,11 @@
-var express = require("express");
-var app = express();
-var port = 3700;
-
-app.set('views', __dirname + '/tpl');
-app.set('view engine', "jade");
-app.engine('jade', require('jade').__express);
+var app = require('express')();
 app.get("/", function(req, res){
-    res.render("page");
+    res.sendfile("page.htm");
 });
-app.use(express.static(__dirname + '/public'));
-var io = require('socket.io').listen(app.listen(port));
-console.log("Now listening on port " + port);
-
+var io = require('socket.io').listen(app.listen(3700));
 io.sockets.on('connection', function(socket){
     socket.emit('message', {message: 'Welcome to the chat'});
-    var address = socket.handshake.address;
-    socket.broadcast.emit('message', {message: '<em>' + address.address + ' Joined The Conversation</em>'});
+    socket.broadcast.emit('message', {message: '<em>' + socket.handshake.address.address + ' Joined The Conversation</em>'});
     socket.on('send', function(data){
         io.sockets.emit('message', data);
     })
