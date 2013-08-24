@@ -13,6 +13,7 @@ window.onload = function() {
             }
             else {
                 messages.push(data.message);
+		content.scrollTop = content.scrollHeight;
             }
             var html = '';
             for (var i = 0; i < messages.length; i++) {
